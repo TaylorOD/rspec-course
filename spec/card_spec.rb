@@ -1,5 +1,6 @@
 class Card
   attr_reader :suit, :rank
+  attr_writer :suit, :rank
 
   def initialize(rank, suit)
     @suit = suit
@@ -8,17 +9,31 @@ class Card
 end
 
 RSpec.describe Card do
-  it 'has a rank' do
-    card = Card.new("Ace", "Spades")
+  # before do
+  #   @card = Card.new("Ace", "Spades")
+  # end
 
-    expect(card.suit).to eq('Spades')
+  # def card
+  #   Card.new("Ace", "Spades")
+  # end
+
+  let(:card) { Card.new("Ace", "Spades") }
+
+  it 'has a rank and it can change' do
+    expect(card.rank).to eq('Ace')
+    card.rank = 'Queen'
+    expect(card.rank).to eq('Queen')
   end
 
   it 'has a suit' do
-    card = Card.new("Ace", "Spades")
-
-    expect(card.rank).to eq('Ace')
+    expect(card.suit).to eq('Spades')
   end
+
+  # Custom error messages
+  # it 'has a suit' do
+  #   card.suit = "Nonesense"
+  #   expect(card.suit).to eq('Spades'), "Hey! I expected Spades but I got #{card.suit}"
+  # end
 end
 
 RSpec.describe 'math calculations' do
